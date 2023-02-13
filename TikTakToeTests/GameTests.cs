@@ -5,16 +5,22 @@ namespace CodeRetreat1;
 
 public class GameTests
 {
+    private readonly Game game;
+
+    public GameTests()
+    {
+        game = new Game();
+    }
+
     [Fact]
     public void Start_Works()
     {
         Game game = new();
     }
+
     [Fact]
     public void GetPlayerOneCharacter_ReturnsCharacter()
     {
-        Game game = new();
-
         var playerOneCharacter = game.GetPlayerOneCharacter();
         
         Assert.Equal('x',playerOneCharacter);
@@ -23,8 +29,6 @@ public class GameTests
     [Fact]
     public void GetPlayerTwoCharacter_ReturnsCharacter()
     {
-        Game game = new();
-
         var playerTwoCharacter = game.GetPlayerTwoCharacter();
         
         Assert.Equal('o',playerTwoCharacter);
@@ -33,11 +37,18 @@ public class GameTests
     [Fact]
     public void PlayersHaveADifferentCharacter()
     {
-        Game game = new Game();
-
         var playerOneCharacter = game.GetPlayerOneCharacter();
         var playerTwoCharacter = game.GetPlayerTwoCharacter();
         
         Assert.NotEqual(playerOneCharacter,playerTwoCharacter);
+    }
+
+    [Fact]
+    public void GameHasA2DimensionalBoard()
+    {
+        var board = game.GetBoard();
+
+        Assert.NotNull(board);
+        Assert.Equal(typeof(Char[][]), board.GetType());
     }
 }
